@@ -52,9 +52,16 @@ export default function Blog() {
         )}
 
         <section className="mt-16 p-6 border border-cyan-800 bg-cyan-900/10 rounded-lg">
-          <h2 className="text-2xl font-bold text-cyan-400 mb-4">Write a Post</h2>
+          <h2 className="text-2xl font-bold text-cyan-400 mb-4">More Posts Coming Soon</h2>
           <p className="text-gray-400 mb-4">
-            To add new blog posts, create a new .mdx file in the <code className="text-cyan-400">content/blog/</code> directory.
+            I'm always writing about new projects, tech discoveries, and lessons learned. 
+            Check back for new posts!
+          </p>
+          <p className="text-gray-400">
+            Have feedback or suggestions?{' '}
+            <a href="mailto:matthew@matthewsmithwebdesign.com" className="text-cyan-500 hover:underline">
+              Drop me an email
+            </a>
           </p>
         </section>
       </div>

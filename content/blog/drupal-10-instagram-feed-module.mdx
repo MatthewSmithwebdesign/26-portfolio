@@ -1,33 +1,37 @@
 ---
 title: "Building an Instagram Feed Module in Drupal 10"
-date: "2024-02-05"
-excerpt: "A step-by-step guide to creating a custom Drupal 10 module that displays an Instagram feed on your website."
+date: "2025-12-15"
+excerpt: "How I built a custom Instagram feed module for Drupal 10 - complete code and step by step."
 tags: ["drupal", "php", "drupal-modules", "instagram", "tutorial"]
 ---
 
 # Building an Instagram Feed Module in Drupal 10
 
-In this tutorial, I'll walk you through creating a custom Drupal 10 module to display an Instagram feed on your website. This is a common request from clients who want to showcase their Instagram content.
+So, you want to show your Instagram posts on your Drupal site? Yeah, I've had this request a bunch of times from clients. They want to display their Instagram feed right on their website without paying for some expensive third-party service.
 
-## Prerequisites
+Here's how I built my own module.
 
-- Drupal 10 installed
-- Basic knowledge of PHP and Drupal module development
-- An Instagram Basic Display API token (more on this below)
+## What You'll Need
 
-## Setting Up Instagram Basic Display API
+- Drupal 10 up and running
+- Some PHP knowledge (not too much, I'll walk you through it)
+- An Instagram account (to get the API token)
 
-Before building the module, you need to get an Instagram access token:
+## Getting the Instagram Token
+
+Before we write any code, we need to get access to the Instagram API:
 
 1. Go to [developers.facebook.com](https://developers.facebook.com/)
-2. Create an app
-3. Add "Instagram Basic Display" product
-4. Add a Test User for your Instagram account
-5. Generate a long-lived access token
+2. Create a new app
+3. Add "Instagram Basic Display" to your app
+4. Add yourself as a Test User
+5. Generate a long-lived access token (they expire, so this is important)
 
-## Create the Module Structure
+Save that token somewhere - you'll need it later.
 
-Create the following directory structure:
+## Set Up the Module Structure
+
+Create a folder in your Drupal installation:
 
 ```
 modules/custom/instagram_feed/
@@ -42,7 +46,7 @@ modules/custom/instagram_feed/
 └── instagram_feed.libraries.yml
 ```
 
-## Step 1: Create the Info File
+## Step 1: The Info File
 
 ```yaml
 # instagram_feed.info.yml
@@ -55,32 +59,20 @@ dependencies:
   - drupal:block
 ```
 
-## Step 2: Create the Module File
+## Step 2: The Module File
 
 ```php
 // instagram_feed.module
 <?php
 
-/**
- * @file
- * Instagram Feed module file.
- */
-
 use Drupal\Core\Routing\RouteMatchInterface;
 
-/**
- * Implements hook_help().
- */
 function instagram_feed_help($route_name, RouteMatchInterface $route_match) {
-  switch ($route_name) {
-    case 'help.page.instagram_feed':
-      return '<p>Display Instagram feed on your website.</p>';
+  if ($route_name == 'help.page.instagram_feed') {
+    return '<p>Display Instagram feed on your website.</p>';
   }
 }
 
-/**
- * Implements hook_theme().
- */
 function instagram_feed_theme() {
   return [
     'instagram_feed' => [
@@ -94,7 +86,7 @@ function instagram_feed_theme() {
 }
 ```
 
-## Step 3: Create the Routing File
+## Step 3: Routing
 
 ```yaml
 # instagram_feed.routing.yml
@@ -107,7 +99,9 @@ instagram_feed.admin_settings:
     _permission: 'administer site configuration'
 ```
 
-## Step 4: Create the Controller
+## Step 4: The Controller
+
+This is where the magic happens - fetching the Instagram posts:
 
 ```php
 // src/Controller/InstagramFeedController.php
@@ -119,7 +113,6 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
 
 class InstagramFeedController extends ControllerBase {
 
@@ -166,7 +159,7 @@ class InstagramFeedController extends ControllerBase {
           }
         }
       }
-      catch (RequestException $e) {
+      catch (\Exception $e) {
         \Drupal::logger('instagram_feed')->error('Failed to fetch Instagram feed: @message', [
           '@message' => $e->getMessage(),
         ]);
@@ -176,17 +169,21 @@ class InstagramFeedController extends ControllerBase {
     return [
       '#theme' => 'instagram_feed',
       '#items' => $items,
-      '#access_token' => $access_token,
+      '#cache' => [
+        'tags' => ['instagram_feed_cache'],
+        'max-age' => 3600,
+      ],
     ];
   }
 }
 ```
 
-## Step 5: Create the Settings Form
+## Step 5: Settings Form
 
-Create `src/Form/InstagramFeedSettingsForm.php`:
+Let admins enter their token without touching code:
 
 ```php
+// src/Form/InstagramFeedSettingsForm.php
 <?php
 
 namespace Drupal\instagram_feed\Form;
@@ -205,7 +202,7 @@ class InstagramFeedSettingsForm extends ConfigFormBase {
   }
 
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config('instagram_feed.settings');
+    $config = $config = $this->config('instagram_feed.settings');
 
     $form['access_token'] = [
       '#type' => 'textfield',
@@ -218,7 +215,6 @@ class InstagramFeedSettingsForm extends ConfigFormBase {
     $form['limit'] = [
       '#type' => 'number',
       '#title' => $this->t('Number of items'),
-      '#description' => $this->t('Number of Instagram posts to display.'),
       '#default_value' => $config->get('limit') ?? 9,
       '#min' => 1,
       '#max' => 25,
@@ -238,7 +234,7 @@ class InstagramFeedSettingsForm extends ConfigFormBase {
 }
 ```
 
-## Step 6: Create the Template
+## Step 6: The Template
 
 ```twig
 {# templates/instagram-feed.html.twig #}
@@ -246,11 +242,8 @@ class InstagramFeedSettingsForm extends ConfigFormBase {
   {% if items %}
     <div class="instagram-feed-grid">
       {% for item in items %}
-        <a href="{{ item.link }}" target="_blank" rel="noopener noreferrer" class="instagram-feed-item">
-          <img src="{{ item.url }}" alt="{{ item.caption|render|striptags|trim|u.truncate(100, '...') }}" loading="lazy" />
-          <div class="instagram-feed-overlay">
-            <span class="instagram-feed-type">{{ item.type }}</span>
-          </div>
+        <a href="{{ item.link }}" target="_blank" class="instagram-feed-item">
+          <img src="{{ item.url }}" alt="{{ item.caption }}" loading="lazy" />
         </a>
       {% endfor %}
     </div>
@@ -265,66 +258,45 @@ class InstagramFeedSettingsForm extends ConfigFormBase {
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
 }
-
-.instagram-feed-item {
-  position: relative;
-  aspect-ratio: 1;
-  overflow: hidden;
-}
-
 .instagram-feed-item img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.instagram-feed-item:hover img {
-  transform: scale(1.05);
+  height: auto;
+  display: block;
 }
 </style>
 ```
 
-## Step 7: Register Libraries
+## Step 7: Enable and Configure
 
-```yaml
-# instagram_feed.libraries.yml
-instagram_feed:
-  version: 1.0.0
-  css:
-    theme:
-      css/instagram-feed.css: {}
-```
+1. Enable it:
+   ```
+   drush en instagram_feed
+   ```
 
-## Step 8: Enable and Configure
-
-1. Enable the module: `drush en instagram_feed`
 2. Go to `/admin/config/instagram-feed`
-3. Enter your access token and save
-4. Create a block or add to a region
 
-## Caching
+3. Paste your access token
 
-Don't forget to add cache tags so the feed refreshes:
+4. Save
 
-```php
-// In your controller
-return [
-  '#theme' => 'instagram_feed',
-  '#items' => $items,
-  '#cache' => [
-    'tags' => ['instagram_feed_cache'],
-    'max-age' => 3600, // 1 hour
-  ],
-];
-```
+5. Add the block to a region or embed in a template
 
-## Conclusion
+## Why Build Your Own?
 
-You now have a fully functional Instagram feed module! This can be extended with:
-- Masonry layout options
-- Lightbox functionality
-- Lazy loading
-- Cache refresh on Instagram webhook events
+I know what you're thinking - "why not just use a module from Drupal.org?"
 
-The module gives you complete control over how your Instagram content displays on your Drupal site.
+Here's the thing:
+- Most free modules have limitations
+- Paid modules are expensive
+- Building your own means you control everything
+- It's actually not that hard once you see the code
+
+## Wrapping Up
+
+That's it! You've got a working Instagram feed module. You can style it however you want, add caching, build a better UI - whatever the client needs.
+
+The Instagram API changes sometimes, so you might need to update the endpoint URLs eventually. But the basic structure should work for a while.
+
+---
+
+*Need help building custom Drupal modules? That's what I do. Let's talk.*
