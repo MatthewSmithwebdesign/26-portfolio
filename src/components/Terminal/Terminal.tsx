@@ -40,8 +40,14 @@ export default function Terminal() {
   const router = useRouter();
 
   useEffect(() => {
+    const today = new Date().toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
     const welcomeLines: TerminalLine[] = [
-      { type: 'success', content: 'Welcome to Matthew Smith Portfolio v1.0.0' },
+      { type: 'success', content: 'Welcome to Matthew Smith Portfolio v3.0.0' },
+      { type: 'output', content: `Today is ${today}` },
       { type: 'output', content: 'Type "help" to see available commands or "ls" to list pages.' },
       { type: 'output', content: '' },
     ];
