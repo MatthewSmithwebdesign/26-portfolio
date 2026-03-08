@@ -9,7 +9,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "Matthew Smith | Full-Stack Developer",
-  description: "Freelance Full-Stack Developer & Senior Drupal Developer. Python, PHP, JavaScript, React, Vue.js, Drupal, Shopify, WordPress, AI Integration.",
+  description: "Freelance Full-Stack Developer & Full-Stack Drupal Developer. Python, PHP, JavaScript, React, Vue.js, Drupal, Shopify, WordPress, AI Integration.",
   icons: {
     icon: "/favicon.svg",
     apple: "/favicon.svg",

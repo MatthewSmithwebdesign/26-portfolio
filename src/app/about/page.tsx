@@ -50,7 +50,7 @@ export default function About() {
 
           <h2 className="text-2xl font-bold text-cyan-500 mt-12 mb-4">Current Role</h2>
           <p className="text-lg leading-relaxed">
-            Currently serving as a <span className="text-cyan-400">Senior Drupal Developer</span> at an enterprise company, 
+            Currently serving as a <span className="text-cyan-400">Full-Stack Drupal Developer</span> at an enterprise company, 
             where I lead development of large-scale, high-traffic Drupal applications. I mentor junior developers 
             and architect solutions that serve millions of users.
           </p>
