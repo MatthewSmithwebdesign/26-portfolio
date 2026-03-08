@@ -13,8 +13,8 @@ export default function About() {
         <section className="space-y-6">
           <div className="border-l-2 border-cyan-600 pl-6">
             <p className="text-xl text-gray-200 leading-relaxed">
-              I'm a <span className="text-cyan-400">Senior Drupal Developer</span> at an enterprise company 
-              with 10+ years of experience building scalable web solutions.
+              I'm a <span className="text-cyan-400">Drupal Developer</span> at an enterprise company 
+              with 4 plus years of experience building scalable web solutions. and over 8 year of Fullstack development experience. I specialize in Drupal, but also have extensive experience with WordPress, Shopify, and custom web applications using React, Vue.js, PHP, and Python.
             </p>
           </div>
 

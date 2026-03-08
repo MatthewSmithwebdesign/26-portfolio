@@ -24,7 +24,7 @@ const projects: Project[] = [
     slug: 'devs-and-dragons',
     title: 'Devs and Dragons',
     description: 'A gamified team recognition platform where teammates give "dragon emojis" to acknowledge wins. Each dragon has unique automated traits - no two are the same. Features weekly recognition, meaningful notes, and collection building.',
-    tech: ['React', 'TypeScript', 'Node.js', 'PostgreSQL'],
+    tech: ['Vue', 'TypeScript', 'Tailwind CSS', 'Convex'],
     category: 'web',
     link: 'https://devsanddragons.quest/',
   },
