@@ -11,6 +11,12 @@ interface Project {
   link?: string;
 }
 
+/**
+ * TODO: Adding new projects
+ * Option 1: Add directly to the projects array below
+ * Option 2: Create an MDX file in content/projects/ (preferred for longer descriptions)
+ */
+
 const projects: Project[] = [
   {
     slug: 'smithys-smokery',
@@ -106,13 +112,10 @@ export default function Projects() {
         </div>
 
         <section className="mt-16 p-6 border border-cyan-800 bg-cyan-900/10 rounded-lg">
-          <h2 className="text-2xl font-bold text-cyan-400 mb-4">Add New Project</h2>
+          <h2 className="text-2xl font-bold text-cyan-400 mb-4">More Projects Coming</h2>
           <p className="text-gray-400 mb-4">
-            To add new projects, simply create a new .mdx file in the <code className="text-cyan-400">content/projects/</code> directory.
+            Always working on something new. Check back for updates!
           </p>
-          <Link href="https://github.com" target="_blank" className="text-cyan-500 hover:underline">
-            View on GitHub &rarr;
-          </Link>
         </section>
       </div>
     </div>

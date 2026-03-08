@@ -30,3 +30,6 @@ next-env.d.ts
 
 # OS
 .DS_Store
+
+# Developer Notes (local only)
+DEVELOPER_NOTES.md
