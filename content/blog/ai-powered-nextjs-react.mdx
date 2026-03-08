@@ -1,0 +1,167 @@
+---
+title: "Building AI-Powered Features in Next.js and React"
+date: "2024-02-01"
+excerpt: "Learn how to integrate AI capabilities into your Next.js and React applications using modern APIs and libraries."
+tags: ["ai", "nextjs", "react", "openai", "typescript"]
+---
+
+# Building AI-Powered Features in Next.js and React
+
+Artificial Intelligence is revolutionizing how we build web applications. In this guide, I'll show you how to integrate AI capabilities into your Next.js and React projects.
+
+## Why Add AI to Your Apps?
+
+AI can enhance user experiences in many ways:
+- **Smart search** - Understand user intent and provide relevant results
+- **Content generation** - Help users create content faster
+- **Chatbots** - Provide 24/7 customer support
+- **Personalization** - Tailor experiences to individual users
+- **Image analysis** - Auto-categorize or tag user uploads
+
+## Getting Started with OpenAI in Next.js
+
+The most popular way to add AI is through OpenAI's API. Here's how to integrate it:
+
+### Step 1: Install the OpenAI SDK
+
+```bash
+npm install openai
+```
+
+### Step 2: Set Up Your API Key
+
+Create a `.env.local` file in your project root:
+
+```bash
+OPENAI_API_KEY=your_api_key_here
+```
+
+### Step 3: Create an API Route
+
+In Next.js App Router, create a route handler:
+
+```typescript
+// app/api/chat/route.ts
+import { OpenAI } from 'openai';
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+export async function POST(request: Request) {
+  const { message } = await request.json();
+
+  const completion = await openai.chat.completions.create({
+    model: 'gpt-4o',
+    messages: [
+      { role: 'system', content: 'You are a helpful assistant.' },
+      { role: 'user', content: message },
+    ],
+  });
+
+  return Response.json({
+    reply: completion.choices[0].message.content,
+  });
+}
+```
+
+### Step 4: Call from Your React Component
+
+```typescript
+// components/ChatBot.tsx
+'use client';
+
+import { useState } from 'react';
+
+export default function ChatBot() {
+  const [message, setMessage] = useState('');
+  const [response, setResponse] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const sendMessage = async () => {
+    setLoading(true);
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message }),
+    });
+    const data = await res.json();
+    setResponse(data.reply);
+    setLoading(false);
+  };
+
+  return (
+    <div>
+      <input
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        placeholder="Ask me anything..."
+      />
+      <button onClick={sendMessage} disabled={loading}>
+        {loading ? 'Thinking...' : 'Send'}
+      </button>
+      {response && <p>{response}</p>}
+    </div>
+  );
+}
+```
+
+## Using Vercel AI SDK
+
+Vercel provides a powerful SDK specifically for building AI chatbots:
+
+```bash
+npm install ai
+```
+
+```typescript
+import { useChat } from 'ai/react';
+
+export default function Chat() {
+  const { messages, input, handleInputChange, handleSubmit } = useChat();
+
+  return (
+    <div>
+      {messages.map((m) => (
+        <div key={m.id}>
+          <strong>{m.role}:</strong> {m.content}
+        </div>
+      ))}
+      <form onSubmit={handleSubmit}>
+        <input
+          value={input}
+          onChange={handleInputChange}
+          placeholder="Say something..."
+        />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  );
+}
+```
+
+## AI Image Generation
+
+You can also integrate image generation:
+
+```typescript
+const response = await openai.images.generate({
+  prompt: 'A modern website design for a restaurant',
+  n: 1,
+  size: '1024x1024',
+});
+
+const imageUrl = response.data[0].url;
+```
+
+## Best Practices
+
+1. **Don't expose API keys** - Always call AI APIs from your server, not the client
+2. **Handle errors gracefully** - AI APIs can fail; show user-friendly messages
+3. **Rate limiting** - Implement rate limits to prevent abuse
+4. **Cost management** - Set budgets and monitor usage
+5. **Content moderation** - Filter inappropriate user inputs
+
+## Conclusion
+
+Adding AI to your Next.js and React applications doesn't have to be complicated. Start small with a simple chatbot or smart search, then expand as you learn. The possibilities are endless!
