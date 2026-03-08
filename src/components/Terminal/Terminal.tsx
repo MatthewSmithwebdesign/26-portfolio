@@ -105,9 +105,9 @@ export default function Terminal() {
 
       case 'contact':
         lines.push({ type: 'output', content: 'Contact Information:' });
-        lines.push({ type: 'success', content: '  Email: Matthew@matthewsmithwebdesign.com' });
-        lines.push({ type: 'output', content: '  GitHub: github.com/MatthewSmithwebdesign' });
-        lines.push({ type: 'output', content: '  LinkedIn: linkedin.com/in/matthewsmithwebdesign/' });
+        lines.push({ type: 'success', content: '  Email: matthew@matthewsmithwebdesign.com' });
+        lines.push({ type: 'output', content: '  GitHub: https://github.com/MatthewSmithwebdesign' });
+        lines.push({ type: 'output', content: '  LinkedIn: https://linkedin.com/in/matthewsmithwebdesign/' });
         break;
 
       case 'whoami':
