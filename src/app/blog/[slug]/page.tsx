@@ -17,25 +17,25 @@ export default async function BlogPost({ params }: PageProps) {
 
   if (!post) {
     return (
-      <div className="min-h-screen bg-black text-gray-300 font-mono p-8">
+      <div className="min-h-screen bg-black text-gray-300 font-mono p-4 sm:p-6 md:p-8 pt-20">
         <div className="max-w-4xl mx-auto">
-          <Link href="/blog" className="text-cyan-500 hover:underline">&larr; Back to Blog</Link>
-          <h1 className="text-4xl font-bold text-red-500 mt-8">Post not found</h1>
+          <Link href="/blog" className="text-cyan-500 hover:underline text-sm sm:text-base">&larr; Back to Blog</Link>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-red-500 mt-6 md:mt-8">Post not found</h1>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-black text-gray-300 font-mono p-8">
+    <div className="min-h-screen bg-black text-gray-300 font-mono p-4 sm:p-6 md:p-8 pt-20">
       <div className="max-w-4xl mx-auto">
-        <Link href="/blog" className="text-cyan-500 hover:underline">&larr; Back to Blog</Link>
+        <Link href="/blog" className="text-cyan-500 hover:underline text-sm sm:text-base">&larr; Back to Blog</Link>
 
-        <article className="mt-8">
-          <header className="mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold text-cyan-500 mb-4">{post.title}</h1>
-            <div className="flex items-center gap-4">
-              <time className="text-gray-500">{post.date}</time>
+        <article className="mt-6 md:mt-8">
+          <header className="mb-6 md:mb-8">
+            <h1 className="text-2xl md:text-4xl font-bold text-cyan-500 mb-4">{post.title}</h1>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+              <time className="text-gray-500 text-sm">{post.date}</time>
               <div className="flex gap-2">
                 {post.tags.map((tag) => (
                   <span
