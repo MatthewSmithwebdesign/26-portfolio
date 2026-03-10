@@ -52,18 +52,18 @@ export default function Projects() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-gray-300 font-mono p-8">
+    <div className="min-h-screen bg-black text-gray-300 font-mono p-4 sm:p-6 md:p-8 pt-20">
       <div className="max-w-6xl mx-auto">
-        <header className="mb-12">
-          <Link href="/" className="text-cyan-500 hover:underline">&larr; Back to Terminal</Link>
+        <header className="mb-8 md:mb-12">
+          <Link href="/" className="text-cyan-500 hover:underline text-sm sm:text-base">&larr; Back to Terminal</Link>
         </header>
 
-        <h1 className="text-4xl font-bold text-cyan-500 mb-4">Projects</h1>
-        <p className="text-lg text-gray-400 mb-8">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-cyan-500 mb-4">Projects</h1>
+        <p className="text-base sm:text-lg text-gray-400 mb-6 md:mb-8">
           A showcase of my work
         </p>
 
-        <div className="mb-8 flex flex-wrap gap-2">
+        <div className="mb-6 md:mb-8 flex flex-wrap gap-2">
           {categories.map((cat) => (
             <span
               key={cat.id}
@@ -111,8 +111,8 @@ export default function Projects() {
           ))}
         </div>
 
-        <section className="mt-16 p-6 border border-cyan-800 bg-cyan-900/10 rounded-lg">
-          <h2 className="text-2xl font-bold text-cyan-400 mb-4">More Projects Coming</h2>
+        <section className="mt-12 md:mt-16 p-4 md:p-6 border border-cyan-800 bg-cyan-900/10 rounded-lg">
+          <h2 className="text-xl md:text-2xl font-bold text-cyan-400 mb-4">More Projects Coming</h2>
           <p className="text-gray-400 mb-4">
             Always working on something new. Check back for updates!
           </p>

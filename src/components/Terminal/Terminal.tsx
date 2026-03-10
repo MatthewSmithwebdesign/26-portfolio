@@ -165,7 +165,7 @@ export default function Terminal() {
 
   return (
     <div 
-      className="min-h-screen bg-black text-gray-300 font-mono p-4 md:p-8 cursor-text"
+      className="min-h-screen bg-black text-gray-300 font-mono p-3 sm:p-4 md:p-8 cursor-text"
       onClick={focusInput}
       role="application"
       aria-label="Terminal interface"
@@ -174,7 +174,7 @@ export default function Terminal() {
         ref={terminalRef}
         className="max-w-4xl mx-auto space-y-1"
       >
-        <pre className="text-cyan-500 text-xs md:text-sm mb-6 whitespace-pre-wrap">
+        <pre className="text-cyan-500 text-[8px] sm:text-xs md:text-sm mb-4 md:mb-6 whitespace-pre leading-tight sm:leading-normal">
           {ASCII_LOGO}
         </pre>
 
@@ -201,8 +201,8 @@ export default function Terminal() {
         </form>
       </div>
 
-      <div className="fixed bottom-4 right-4 text-gray-600 text-sm">
-        <Link href="/about" className="hover:text-cyan-500 transition-colors">[Click for GUI mode]</Link>
+      <div className="fixed bottom-4 right-4 text-gray-600 text-xs sm:text-sm">
+        <Link href="/about" className="hover:text-cyan-500 transition-colors">[GUI Mode]</Link>
       </div>
     </div>
   );

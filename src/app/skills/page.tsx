@@ -33,18 +33,18 @@ const skillCategories = [
 
 export default function Skills() {
   return (
-    <div className="min-h-screen bg-black text-gray-300 font-mono p-8">
+    <div className="min-h-screen bg-black text-gray-300 font-mono p-4 sm:p-6 md:p-8 pt-20">
       <div className="max-w-4xl mx-auto">
-        <header className="mb-12">
-          <Link href="/" className="text-cyan-500 hover:underline">&larr; Back to Terminal</Link>
+        <header className="mb-8 md:mb-12">
+          <Link href="/" className="text-cyan-500 hover:underline text-sm sm:text-base">&larr; Back to Terminal</Link>
         </header>
 
-        <h1 className="text-4xl font-bold text-cyan-500 mb-8">Technical Skills</h1>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-cyan-500 mb-6 md:mb-8">Technical Skills</h1>
 
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-2">
           {skillCategories.map((category) => (
-            <div key={category.name} className="border border-cyan-800/50 rounded-lg p-6 hover:border-cyan-600 transition-colors">
-              <h2 className="text-xl font-bold text-cyan-400 mb-4">{category.name}</h2>
+            <div key={category.name} className="border border-cyan-800/50 rounded-lg p-4 md:p-6 hover:border-cyan-600 transition-colors">
+              <h2 className="text-lg md:text-xl font-bold text-cyan-400 mb-4">{category.name}</h2>
               <div className="flex flex-wrap gap-2">
                 {category.skills.map((skill) => (
                   <span 
@@ -59,8 +59,8 @@ export default function Skills() {
           ))}
         </div>
 
-        <section className="mt-12">
-          <h2 className="text-2xl font-bold text-cyan-500 mb-6">Specializations</h2>
+        <section className="mt-10 md:mt-12">
+          <h2 className="text-xl md:text-2xl font-bold text-cyan-500 mb-4 md:mb-6">Specializations</h2>
           <div className="space-y-4">
             <div className="p-4 border-l-2 border-cyan-600">
               <h3 className="text-lg font-bold text-gray-200">Drupal Expert</h3>
