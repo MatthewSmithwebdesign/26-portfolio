@@ -27,7 +27,7 @@ export default function Navigation() {
             href="/" 
             className="text-cyan-500 font-bold text-lg hover:text-cyan-400 transition-colors"
           >
-            matthew<span className="text-gray-400">@portfolio</span>
+            Matthew Smith
           </Link>
 
           <div className="hidden md:flex items-center gap-1">
