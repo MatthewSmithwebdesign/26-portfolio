@@ -34,7 +34,7 @@ const ASCII_LOGO = `
 export default function Terminal() {
   const [history, setHistory] = useState<TerminalLine[]>([]);
   const [input, setInput] = useState('');
-  const [currentPath, setCurrentPath] = useState('~');
+  const [currentPath] = useState('~');
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
@@ -51,6 +51,7 @@ export default function Terminal() {
       { type: 'output', content: 'Type "help" to see available commands or "ls" to list pages.' },
       { type: 'output', content: '' },
     ];
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setHistory(welcomeLines);
   }, []);
 
@@ -94,8 +95,8 @@ export default function Terminal() {
         break;
 
       case 'skills':
-        router.push('/skills');
-        lines.push({ type: 'success', content: 'Navigating to skills page...' });
+        router.push('/about');
+        lines.push({ type: 'success', content: 'Navigating to about page (skills merged)...' });
         break;
 
       case 'blog':

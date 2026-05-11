@@ -1,69 +1,86 @@
 import Link from 'next/link';
 import { getAllPosts } from '@/lib/blog';
+import ScrollReveal from '@/components/ScrollReveal';
 
 export default function Blog() {
   const posts = getAllPosts();
 
   return (
-    <div className="min-h-screen bg-black text-gray-300 font-mono p-4 sm:p-6 md:p-8 pt-20">
-      <div className="max-w-4xl mx-auto">
-        <header className="mb-8 md:mb-12">
-          <Link href="/" className="text-cyan-500 hover:underline text-sm sm:text-base">&larr; Back to Terminal</Link>
+    <div className="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto">
+        <header className="mb-12">
+          <Link href="/" className="text-accent hover:text-accent-hover transition-colors text-sm">&larr; Back to Home</Link>
+          <h1 className="text-3xl sm:text-4xl font-bold text-fg mt-4 mb-3">Blog</h1>
+          <p className="text-muted text-lg">
+            Thoughts on web development, AI integration, and lessons learned along the way.
+          </p>
         </header>
 
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-cyan-500 mb-4">Blog</h1>
-        <p className="text-base sm:text-lg text-gray-400 mb-6 md:mb-8">
-          Thoughts on web development, Python, Django, and my journey in tech
-        </p>
-
         {posts.length === 0 ? (
-          <p className="text-gray-400">No posts yet. Check back soon!</p>
+          <p className="text-muted">No posts yet. Check back soon!</p>
         ) : (
-          <div className="space-y-6">
-            {posts.map((post) => (
-              <article
-                key={post.slug}
-                className="border border-cyan-800/50 rounded-lg p-4 md:p-6 hover:border-cyan-600 transition-colors bg-black/50"
-              >
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-3">
-                  <time className="text-gray-500 text-sm">{post.date}</time>
-                  <div className="flex gap-2">
-                    {post.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2 py-0.5 bg-cyan-900/20 border border-cyan-700/30 rounded text-xs text-cyan-400"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <h2 className="text-lg md:text-xl font-bold text-gray-200 mb-2">{post.title}</h2>
-                <p className="text-gray-400 mb-4">{post.excerpt}</p>
+          <div className="grid gap-6 sm:grid-cols-2">
+            {posts.map((post, i) => (
+              <ScrollReveal key={post.slug} delay={i * 100}>
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="text-cyan-500 hover:underline text-sm"
+                  className="group block rounded-2xl border border-border bg-card hover:border-accent/50 transition-all hover:shadow-lg hover:shadow-accent/5 hover:-translate-y-1 overflow-hidden"
                 >
-                  Read more →
+                  <div className="h-44 bg-card overflow-hidden">
+                    <img
+                      src={`/images/blog/${post.slug}.svg`}
+                      alt={`Cover image for ${post.title}`}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <div className="flex flex-wrap items-center gap-3 mb-3">
+                      <time className="text-xs text-muted">
+                        {new Date(post.date).toLocaleDateString('en-US', {
+                          month: 'long',
+                          day: 'numeric',
+                          year: 'numeric',
+                        })}
+                      </time>
+                      <div className="flex gap-1.5">
+                        {post.tags.slice(0, 3).map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-2 py-0.5 bg-accent/5 text-muted text-xs rounded-md border border-border"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <h2 className="text-lg font-semibold text-fg group-hover:text-accent transition-colors mb-2 leading-snug">
+                      {post.title}
+                    </h2>
+                    <p className="text-sm text-muted mb-3">{post.excerpt}</p>
+                    <span className="inline-flex items-center text-accent text-sm font-medium group-hover:text-accent-hover transition-colors">
+                      Read more &rarr;
+                    </span>
+                  </div>
                 </Link>
-              </article>
+              </ScrollReveal>
             ))}
           </div>
         )}
 
-        <section className="mt-12 md:mt-16 p-4 md:p-6 border border-cyan-800 bg-cyan-900/10 rounded-lg">
-          <h2 className="text-xl md:text-2xl font-bold text-cyan-400 mb-4">More Posts Coming Soon</h2>
-          <p className="text-gray-400 mb-4">
-            I'm always writing about new projects, tech discoveries, and lessons learned. 
-            Check back for new posts!
-          </p>
-          <p className="text-gray-400">
-            Have feedback or suggestions?{' '}
-            <a href="mailto:matthew@matthewsmithwebdesign.com" className="text-cyan-500 hover:underline">
-              Drop me an email
+        <ScrollReveal>
+          <section className="mt-12 p-8 border border-border bg-card rounded-2xl text-center">
+            <h2 className="text-xl font-bold text-fg mb-3">Have feedback?</h2>
+            <p className="text-muted mb-4">
+              I&apos;m always writing about new projects and tech discoveries.
+            </p>
+            <a
+              href="mailto:matthew@matthewsmithwebdesign.com"
+              className="text-accent hover:text-accent-hover transition-colors font-medium"
+            >
+              Drop me an email &rarr;
             </a>
-          </p>
-        </section>
+          </section>
+        </ScrollReveal>
       </div>
     </div>
   );
