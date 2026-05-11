@@ -30,7 +30,7 @@ const skillCategories = [
 ];
 
 const stats = [
-  { value: '8+', label: 'Years Experience' },
+  { value: '8', label: 'Years Experience' },
   { value: 'Enterprise', label: 'Drupal Scale' },
   { value: 'Full-Stack', label: 'Frontend + Backend' },
   { value: 'AI', label: 'Integration Expert' },
@@ -109,7 +109,7 @@ export default function About() {
               <div className="flex-1">
                 <h1 className="text-3xl sm:text-4xl font-bold text-fg mb-3">About Me</h1>
                 <p className="text-lg text-muted leading-relaxed">
-                  I&apos;m a <strong className="text-fg">Full-Stack Developer</strong> with 8+ years of experience
+                  I&apos;m a <strong className="text-fg">Full-Stack Developer</strong> with 8 years of experience
                   building modern web solutions. I specialize in React, Next.js, Drupal, and AI integration —
                   working with enterprise companies and freelance clients alike.
                 </p>
@@ -141,14 +141,14 @@ export default function About() {
                 <div className="absolute inset-0 bg-[linear-gradient(90deg,var(--accent),transparent)] opacity-5" />
               </div>
               <p className="text-fg leading-relaxed text-lg">
-                Currently serving as a <strong>Full-Stack Drupal Developer</strong> at an enterprise company,
-                where I architect large-scale, high-traffic Drupal applications and mentor junior developers.
+                Currently serving as a <strong>Full-Stack Drupal Developer</strong> at an enterprise company
+                for the past 4 years, where I architect large-scale, high-traffic Drupal applications and mentor junior developers.
               </p>
             </div>
             <p className="text-muted leading-relaxed text-lg">
-              On the freelance side, I help businesses build custom websites and web applications — from
-              enterprise CMS implementations to modern AI-powered apps. I love turning complex problems
-              into simple, elegant solutions.
+              Since 2018, I&apos;ve also run a thriving freelance practice — helping businesses build custom websites
+              and web applications, from enterprise CMS implementations to modern AI-powered apps. I love turning
+              complex problems into simple, elegant solutions.
             </p>
           </section>
         </ScrollReveal>
