@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { getAllPosts } from '@/lib/blog';
 import ScrollReveal from '@/components/ScrollReveal';
 
@@ -10,6 +11,7 @@ const featuredProjects = [
     tech: ['Next.js', 'TypeScript', 'Tailwind'],
     link: 'https://socalep.vercel.app/',
     gradient: 'from-blue-500 to-cyan-500',
+    image: '/images/projects-socal-ep.png',
   },
   {
     slug: 'devs-and-dragons',
@@ -18,6 +20,7 @@ const featuredProjects = [
     tech: ['Vue', 'TypeScript', 'Convex'],
     link: 'https://devsandragons.quest/',
     gradient: 'from-violet-500 to-fuchsia-500',
+    image: '/images/projects-devs-and-dragons.png',
   },
   {
     slug: 'dr-phillips-smith',
@@ -26,6 +29,7 @@ const featuredProjects = [
     tech: ['Next.js', 'TypeScript', 'Tailwind'],
     link: 'https://dr-phillips-smith.vercel.app/',
     gradient: 'from-emerald-500 to-teal-500',
+    image: '/images/projects-dr-phillips-smith.png',
   },
 ];
 
@@ -114,10 +118,22 @@ export default function Home() {
                     rel="noopener noreferrer"
                     className="group block rounded-2xl border border-border bg-card hover:border-accent/50 transition-all hover:shadow-lg hover:shadow-accent/5 hover:-translate-y-1 overflow-hidden"
                   >
-                    <div className={`h-40 bg-gradient-to-br ${project.gradient} flex items-center justify-center`}>
-                      <span className="text-white/80 text-4xl font-bold opacity-30 group-hover:opacity-50 transition-opacity">
-                        {project.title.charAt(0)}
-                      </span>
+                    <div className="h-40 bg-card relative overflow-hidden">
+                      {project.image ? (
+                        <Image
+                          src={project.image}
+                          alt={`${project.title} screenshot`}
+                          fill
+                          className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        />
+                      ) : (
+                        <div className={`w-full h-full bg-gradient-to-br ${project.gradient} flex items-center justify-center`}>
+                          <span className="text-white/80 text-4xl font-bold opacity-30 group-hover:opacity-50 transition-opacity">
+                            {project.title.charAt(0)}
+                          </span>
+                        </div>
+                      )}
                     </div>
                     <div className="p-5">
                       <h3 className="text-lg font-semibold text-fg mb-1.5 group-hover:text-accent transition-colors">
