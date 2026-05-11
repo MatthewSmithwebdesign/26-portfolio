@@ -133,23 +133,50 @@ export default function About() {
           </div>
         </ScrollReveal>
 
-        {/* Bio */}
+        {/* Experience */}
         <ScrollReveal>
-          <section className="space-y-6 mb-14">
-            <div className="relative p-6 bg-gradient-to-r from-accent/5 to-transparent border-l-4 border-accent rounded-r-2xl overflow-hidden">
-              <div className="absolute inset-0 -z-10" aria-hidden="true">
-                <div className="absolute inset-0 bg-[linear-gradient(90deg,var(--accent),transparent)] opacity-5" />
+          <section className="mb-14">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold text-fg mb-2">Enterprise & Freelance</h2>
+              <p className="text-muted text-sm">Full-stack problem solving at every scale</p>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="relative p-6 bg-card border border-border rounded-xl overflow-hidden group hover:border-accent/50 transition-all hover:shadow-md hover:shadow-accent/5">
+                <div className="absolute inset-0 -z-10" aria-hidden="true">
+                  <div className="absolute -top-10 -right-10 w-40 h-40 bg-[radial-gradient(circle,_var(--accent)_0%,_transparent_60%)] opacity-10 dark:opacity-5" />
+                </div>
+                <div className="w-10 h-10 rounded-lg bg-accent/10 text-accent flex items-center justify-center mb-4">
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold text-fg mb-1">Enterprise</h3>
+                <p className="text-sm text-accent font-medium mb-3">4 years</p>
+                <p className="text-sm text-muted leading-relaxed">
+                  Full-Stack Drupal Developer architecting large-scale, high-traffic applications and mentoring junior developers at an enterprise company.
+                </p>
               </div>
-              <p className="text-fg leading-relaxed text-lg">
-                Currently serving as a <strong>Full-Stack Drupal Developer</strong> at an enterprise company
-                for the past 4 years, where I architect large-scale, high-traffic Drupal applications and mentor junior developers.
+              <div className="relative p-6 bg-card border border-border rounded-xl overflow-hidden group hover:border-violet-500/50 transition-all hover:shadow-md hover:shadow-violet-500/5">
+                <div className="absolute inset-0 -z-10" aria-hidden="true">
+                  <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-[radial-gradient(circle,_#8b5cf6_0%,_transparent_60%)] opacity-10 dark:opacity-5" />
+                </div>
+                <div className="w-10 h-10 rounded-lg bg-violet-500/10 text-violet-500 flex items-center justify-center mb-4">
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold text-fg mb-1">Freelance</h3>
+                <p className="text-sm text-accent font-medium mb-3">Since 2018</p>
+                <p className="text-sm text-muted leading-relaxed">
+                  Built custom websites and applications for diverse clients — from enterprise CMS implementations to modern AI-powered apps.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 p-4 bg-gradient-to-r from-accent/5 to-violet-500/5 border border-border rounded-xl text-center">
+              <p className="text-sm text-muted">
+                Same problem-solving mindset, from solo freelance builds to enterprise-scale architecture.
               </p>
             </div>
-            <p className="text-muted leading-relaxed text-lg">
-              Since 2018, I&apos;ve also run a thriving freelance practice — helping businesses build custom websites
-              and web applications, from enterprise CMS implementations to modern AI-powered apps. I love turning
-              complex problems into simple, elegant solutions.
-            </p>
           </section>
         </ScrollReveal>
 

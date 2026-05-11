@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import ScrollReveal from '@/components/ScrollReveal';
 
 interface Project {
@@ -10,6 +11,7 @@ interface Project {
   link?: string;
   featured?: boolean;
   gradient: string;
+  image?: string;
 }
 
 const projects: Project[] = [
@@ -22,6 +24,7 @@ const projects: Project[] = [
     link: 'https://socalep.vercel.app/',
     featured: true,
     gradient: 'from-blue-500 to-cyan-500',
+    image: '/images/projects-socal-ep.png',
   },
   {
     slug: 'devs-and-dragons',
@@ -32,6 +35,7 @@ const projects: Project[] = [
     link: 'https://devsanddragons.quest/',
     featured: true,
     gradient: 'from-violet-500 to-fuchsia-500',
+    image: '/images/projects-devs-and-dragons.png',
   },
   {
     slug: 'dr-phillips-smith',
@@ -42,6 +46,7 @@ const projects: Project[] = [
     link: 'https://dr-phillips-smith.vercel.app/',
     featured: true,
     gradient: 'from-emerald-500 to-teal-500',
+    image: '/images/projects-dr-phillips-smith.png',
   },
   {
     slug: 'smithys-smokery',
@@ -51,6 +56,7 @@ const projects: Project[] = [
     category: 'web',
     link: 'https://smithysmokery.netlify.app/',
     gradient: 'from-amber-500 to-orange-500',
+    image: '/images/projects-smithys-smokery.png',
   },
 ];
 
@@ -75,10 +81,22 @@ export default function Projects() {
               rel="noopener noreferrer"
               className="group block rounded-2xl border border-border bg-card hover:border-accent/50 transition-all hover:shadow-lg hover:shadow-accent/5 hover:-translate-y-1 overflow-hidden"
             >
-              <div className={`h-40 bg-gradient-to-br ${project.gradient} flex items-center justify-center`}>
-                <span className="text-white/80 text-4xl font-bold opacity-30 group-hover:opacity-50 transition-opacity">
-                  {project.title.charAt(0)}
-                </span>
+              <div className="h-40 bg-card relative overflow-hidden">
+                {project.image ? (
+                  <Image
+                    src={project.image}
+                    alt={`${project.title} screenshot`}
+                    fill
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                ) : (
+                  <div className={`w-full h-full bg-gradient-to-br ${project.gradient} flex items-center justify-center`}>
+                    <span className="text-white/80 text-4xl font-bold opacity-30 group-hover:opacity-50 transition-opacity">
+                      {project.title.charAt(0)}
+                    </span>
+                  </div>
+                )}
               </div>
               <div className="p-5">
                 <div className="flex items-start justify-between gap-3 mb-2">
