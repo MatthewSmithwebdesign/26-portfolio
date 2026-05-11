@@ -183,17 +183,27 @@ export default function About() {
         {/* Skills */}
         <ScrollReveal>
           <section className="mb-14">
-            <h2 className="text-2xl font-bold text-fg mb-6">Skills & Technologies</h2>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold text-fg mb-2">Skills & Technologies</h2>
+              <p className="text-muted text-sm">Tools and technologies I work with daily</p>
+            </div>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {skillCategories.map((category, i) => (
                 <ScrollReveal key={category.name} delay={i * 80}>
-                  <div className="p-5 border border-border bg-card rounded-xl hover:border-accent/50 hover:shadow-md hover:shadow-accent/5 transition-all">
-                    <h3 className="text-sm font-semibold text-fg mb-3 uppercase tracking-wider">{category.name}</h3>
+                  <div className="relative p-5 pt-6 border border-border bg-card rounded-xl hover:border-accent/50 hover:shadow-lg hover:shadow-accent/5 transition-all group overflow-hidden">
+                    <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-accent to-violet-500 opacity-60" />
+                    <div className="absolute inset-0 -z-10 opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true">
+                      <div className="absolute -top-10 -right-10 w-32 h-32 bg-[radial-gradient(circle,_var(--accent)_0%,_transparent_60%)] opacity-5" />
+                    </div>
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-sm font-bold text-fg uppercase tracking-wider">{category.name}</h3>
+                      <span className="px-2 py-0.5 bg-accent/10 text-accent text-xs rounded-full font-medium">{category.skills.length}</span>
+                    </div>
                     <div className="flex flex-wrap gap-1.5">
                       {category.skills.map((skill) => (
                         <span
                           key={skill}
-                          className="px-2.5 py-1 bg-accent/5 text-muted text-xs rounded-md border border-border hover:bg-accent/10 hover:text-accent hover:border-accent/30 transition-all"
+                          className="px-2.5 py-1 bg-accent/5 text-muted text-xs rounded-md border border-border hover:bg-accent/10 hover:text-accent hover:border-accent/30 hover:scale-105 transition-all"
                         >
                           {skill}
                         </span>
@@ -209,17 +219,23 @@ export default function About() {
         {/* Specializations */}
         <ScrollReveal>
           <section className="mb-14">
-            <h2 className="text-2xl font-bold text-fg mb-6">What I Specialize In</h2>
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold text-fg mb-2">What I Specialize In</h2>
+              <p className="text-muted text-sm">Where I deliver the most value</p>
+            </div>
+            <div className="grid gap-5 sm:grid-cols-2">
               {specializations.map((item, i) => (
                 <ScrollReveal key={item.title} delay={i * 80}>
-                  <div className="p-5 border border-border bg-card rounded-xl hover:border-accent/50 hover:shadow-md hover:shadow-accent/5 transition-all group">
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-lg bg-accent/10 text-accent flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <div className="relative p-6 border border-border bg-card rounded-xl hover:border-accent/50 hover:shadow-lg hover:shadow-accent/5 transition-all group overflow-hidden">
+                    <div className="absolute inset-0 -z-10 opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true">
+                      <div className={`absolute -${i % 2 === 0 ? 'top' : 'bottom'}-10 -${i % 2 === 0 ? 'right' : 'left'}-10 w-48 h-48 bg-[radial-gradient(circle,_var(--accent)_0%,_transparent_60%)] opacity-10`} />
+                    </div>
+                    <div className="flex items-start gap-5">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent/20 to-violet-500/20 text-accent flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:from-accent/30 group-hover:to-violet-500/30 transition-all">
                         {item.icon}
                       </div>
-                      <div>
-                        <h3 className="text-fg font-semibold mb-1.5">{item.title}</h3>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-fg font-semibold mb-1.5 group-hover:text-accent transition-colors">{item.title}</h3>
                         <p className="text-sm text-muted leading-relaxed">{item.desc}</p>
                       </div>
                     </div>
