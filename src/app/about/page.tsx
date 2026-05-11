@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import ScrollReveal from '@/components/ScrollReveal';
 
 const skillCategories = [
@@ -96,11 +97,14 @@ export default function About() {
               <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-[radial-gradient(circle,_#8b5cf6_0%,_transparent_60%)] opacity-10 dark:opacity-5" />
             </div>
             <div className="flex flex-col sm:flex-row items-start gap-6 relative z-10">
-              <div
-                className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-br from-accent to-violet-500 flex items-center justify-center shrink-0 shadow-lg shadow-accent/20 animate-pulse-glow"
-                aria-hidden="true"
-              >
-                <span className="text-white text-2xl sm:text-3xl font-bold">MS</span>
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden shrink-0 shadow-lg shadow-accent/20">
+                <Image
+                  src="/images/logo.jpg"
+                  alt="Matthew Smith"
+                  width={100}
+                  height={110}
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="flex-1">
                 <h1 className="text-3xl sm:text-4xl font-bold text-fg mb-3">About Me</h1>

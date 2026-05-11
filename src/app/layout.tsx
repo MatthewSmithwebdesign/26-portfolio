@@ -27,6 +27,7 @@ const jsonLd = {
       "@type": "Person",
       name: "Matthew Smith",
       url: "https://matthewsmithwebdesign.com",
+      image: "https://matthewsmithwebdesign.com/images/logo.jpg",
       jobTitle: "Full-Stack Developer",
       sameAs: [
         "https://github.com/MatthewSmithwebdesign",
@@ -50,8 +51,8 @@ export const metadata: Metadata = {
   description:
     "Full-Stack Developer building modern web solutions with React, Next.js, Drupal, and AI integration.",
   icons: {
-    icon: "/favicon.svg",
-    apple: "/favicon.svg",
+    icon: "/images/logo.jpg",
+    apple: "/images/logo.jpg",
   },
   openGraph: {
     type: "website",
@@ -60,12 +61,21 @@ export const metadata: Metadata = {
     title: "Matthew Smith | Full-Stack Developer",
     description:
       "Full-Stack Developer building modern web solutions with React, Next.js, Drupal, and AI integration.",
+    images: [
+      {
+        url: "/images/logo.jpg",
+        width: 100,
+        height: 110,
+        alt: "Matthew Smith logo",
+      },
+    ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: "Matthew Smith | Full-Stack Developer",
     description:
       "Full-Stack Developer building modern web solutions with React, Next.js, Drupal, and AI integration.",
+    images: ["/images/logo.jpg"],
   },
   robots: {
     index: true,

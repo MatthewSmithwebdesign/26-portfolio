@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 const navLinks = [
@@ -45,8 +46,15 @@ export default function Navigation() {
         <div className="flex items-center justify-between h-14">
           <Link
             href="/"
-            className="text-fg font-semibold text-lg hover:text-accent transition-colors"
+            className="flex items-center gap-2 text-fg font-semibold text-lg hover:text-accent transition-colors"
           >
+            <Image
+              src="/images/logo.jpg"
+              alt="Matthew Smith"
+              width={22}
+              height={24}
+              className="rounded"
+            />
             Matthew Smith
           </Link>
 
