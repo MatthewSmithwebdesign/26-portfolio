@@ -33,3 +33,7 @@ next-env.d.ts
 
 # Developer Notes (local only)
 DEVELOPER_NOTES.md
+
+# Plans / specs
+.opencode/
+SPEC.md
